@@ -1,4 +1,4 @@
-interface Participations {
+interface Participation {
   id: number;
   year: number;
   city: string;
@@ -9,8 +9,8 @@ interface Participations {
 interface CountryData {
   id: number;
   name: string;
-  participations: Participations[];
+  participations: Participation[];
 }
 
 type Olympic = CountryData[];
-export type { Olympic, CountryData, Participations };
+export type { Olympic, CountryData, Participation };

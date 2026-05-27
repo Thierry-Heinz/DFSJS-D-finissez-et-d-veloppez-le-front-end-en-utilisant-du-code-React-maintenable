@@ -10,7 +10,11 @@ import {
   LineElement,
   PointElement,
 } from 'chart.js';
-import type { CountryData } from '../../models/models';
+import type {
+  CountryData,
+  OlympicData,
+  Participation,
+} from '../../models/models';
 
 ChartJS.register(
   ArcElement,
@@ -24,23 +28,23 @@ ChartJS.register(
 );
 
 type PieMedalChartProps = {
-  pieData: any; // Anti-pattern 3 — Utilisation de `any` pour les props ne permettant pas de bénéficier de TypeScript.
+  pieData: OlympicData; // Anti-pattern 3 — Utilisation de `any` pour les props ne permettant pas de bénéficier de TypeScript.
 };
 
 const PieMedalChart = ({ pieData }: PieMedalChartProps) => {
   const calculateTotalMedals = (country: CountryData) => {
     return country.participations.reduce(
-      (sum: number, p: number) => sum + p.medalsCount,
+      (sum: number, p: Participation) => sum + p.medalsCount,
       0
     );
   };
 
   const chartData = {
-    labels: pieData.map((d: any) => d.name),
+    labels: pieData.map((d: CountryData) => d.name),
     datasets: [
       {
         label: 'Total des médailles',
-        data: pieData.map((d: any) => calculateTotalMedals(d)),
+        data: pieData.map((d: CountryData) => calculateTotalMedals(d)),
         backgroundColor: [
           'rgba(255, 99, 132, 0.6)',
           'rgba(54, 162, 235, 0.6)',

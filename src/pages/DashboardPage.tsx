@@ -3,7 +3,7 @@ import PieMedalChart from '../components/PieMedalChart/PieMedalChart';
 import useData from '../hooks/useData';
 
 const DashboardPage = () => {
-  const { data, isLoading } = useData(); // Anti-pattern 1 — données statiques importées directement dans le composant — idéalement : fetching depuis une API ou custom hook.
+  const { data, loading, error, empty } = useData(); // Anti-pattern 1 — données statiques importées directement dans le composant — idéalement : fetching depuis une API ou custom hook.
 
   // Anti-pattern 6 — Logique métier complexe directement dans le composant
 
@@ -23,8 +23,20 @@ const DashboardPage = () => {
     },
   ];
 
-  if (isLoading) {
+  if (loading) {
     return <div>Chargement...</div>;
+  }
+
+  if (error) {
+    return <div>Erreur : {error}</div>;
+  }
+
+  if (data === null) {
+    return <div>Pas de données</div>;
+  }
+
+  if (empty) {
+    return <div>Aucune donnée disponible</div>;
   }
 
   return (
