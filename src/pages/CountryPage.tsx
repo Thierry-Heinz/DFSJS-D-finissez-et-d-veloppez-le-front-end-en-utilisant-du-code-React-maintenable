@@ -1,6 +1,4 @@
-import React, { type FC } from "react";
-
-const CountryPage: FC = () => {
+const CountryPage = () => {
   return <div>CountryPage</div>;
 };
 
