@@ -24,3 +24,27 @@
 - Créer les fonctions et les composants en ayant à l'esprit leur évolution fonctionelle (par exemple chargement dynamique de données via API)
 - ajout d'un switch light / dark
 - créer une version version plus réactive (mobile / desktop)
+
+## Arborescence
+
+src/app
+|- App.tsx - Fichier de render
+|
+|-- components/
+|--- HeaderComponent.tsx - Entête réutilisable - Dumb
+|--- Indicator.tsx - Carte format de nombre - Dumb
+|--- CountriesPieChart.tsx - Graphique camembert tous les pays - Dumb
+|--- CountryLineChart.tsx - Graphique line médaille par pays - Dumb
+
+|
+|-- pages/
+|---- DashboardPage.tsx - page d'accueil dashboard - Smart
+|---- CountryPage.tsx - page de détail country - Smart
+|---- NotFound.tsx - page gestion des erreurs - Dumb
+|
+|-- hooks/
+|--- useData.ts - datafetching (mockup avec useEffect)
+|
+|-- models/
+|--- models.ts - définition des types
+
