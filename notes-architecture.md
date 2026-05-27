@@ -32,6 +32,7 @@
 
 src/app/
 ├── App.tsx - Fichier de render + gesiton de route
+├── routes.tsx - Gestion de la route
 ├── components/
 │ ├── HeaderComponent.tsx - Entête réutilisable - Dumb
 │ ├── Indicator.tsx - Carte format de nombre - Dumb
