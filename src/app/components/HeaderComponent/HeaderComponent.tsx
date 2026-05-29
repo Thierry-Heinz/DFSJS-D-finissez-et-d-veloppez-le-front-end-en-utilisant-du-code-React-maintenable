@@ -27,7 +27,7 @@ const HeaderComponent = ({
   };
 
   return (
-    <div className="col-span-4">
+    <div className="col-span-4 text-green">
       <div className="rounded-lg shadow-xl bg-gray-800 mb-4 p-8 relative">
         {location.pathname.includes('/countries') && (
           <Link to="/">
