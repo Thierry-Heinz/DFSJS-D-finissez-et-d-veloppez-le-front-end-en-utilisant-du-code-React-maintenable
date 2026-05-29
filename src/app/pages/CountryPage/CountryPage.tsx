@@ -64,7 +64,11 @@ const CountryPage = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
       <div className="max-w-6xl mx-auto flex flex-col items-center">
-        <HeaderComponent title={country?.name} stats={CountryStats} />
+        <HeaderComponent
+          title={country?.name}
+          stats={CountryStats}
+          statsCols={3}
+        />
 
         <div className="bg-gray-800 p-8 rounded-lg shadow-xl w-full">
           <div style={{ height: '400px' }}>

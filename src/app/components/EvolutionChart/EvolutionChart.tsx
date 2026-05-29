@@ -26,8 +26,6 @@ ChartJS.register(
 type EvolutionChartProps = { country: Olympic };
 
 const EvolutionChart = ({ country }: EvolutionChartProps) => {
-  console.log(country.participations);
-
   const sortedParticipations = country.participations.sort(
     (a, b) => a.year - b.year
   ); // décroissant

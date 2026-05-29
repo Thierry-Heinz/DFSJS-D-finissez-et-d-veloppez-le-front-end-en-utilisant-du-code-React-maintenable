@@ -9,15 +9,25 @@ type HeaderComponentProps = {
     value: number;
     color: string;
   }[];
+  statsCols: number;
 };
 
-const HeaderComponent = ({ title, subtitle, stats }: HeaderComponentProps) => {
+const HeaderComponent = ({
+  title,
+  subtitle,
+  stats,
+  statsCols,
+}: HeaderComponentProps) => {
   const location = useLocation();
 
-  console.log(location);
+  const colsMap: Record<number, string> = {
+    1: 'md:grid-cols-1',
+    2: 'md:grid-cols-2',
+    3: 'md:grid-cols-3',
+  };
 
   return (
-    <div className="w-full">
+    <div className="col-span-4">
       <div className="rounded-lg shadow-xl bg-gray-800 mb-4 p-8 relative">
         {location.pathname.includes('/countries') && (
           <Link to="/">
@@ -37,9 +47,7 @@ const HeaderComponent = ({ title, subtitle, stats }: HeaderComponentProps) => {
         )}
       </div>
 
-      <div
-        className={`mb-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-${stats.length} gap-4`}
-      >
+      <div className={`mb-2 grid grid-cols-1 ${colsMap[statsCols]} gap-4`}>
         {stats.map((stat, index) => (
           <Indicator
             key={index}

@@ -4,3 +4,8 @@
 html {
   font-family: 'Inter Variable', sans-serif;
 }
+
+@theme {
+  --breakpoint-lg: 768px;
+  --breakpoint-xl: 1200px;
+}
