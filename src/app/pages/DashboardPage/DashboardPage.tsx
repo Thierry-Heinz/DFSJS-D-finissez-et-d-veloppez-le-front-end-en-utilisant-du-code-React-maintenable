@@ -1,11 +1,9 @@
-import Indicator from '../components/Indicator/Indicator';
-import PieMedalChart from '../components/PieMedalChart/PieMedalChart';
-import useData from '../hooks/useData';
+import Indicator from '../../components/Indicator/Indicator';
+import PieMedalChart from '../../components/PieMedalChart/MedalChart';
+import useData from '../../hooks/useData';
 
 const DashboardPage = () => {
   const { data, loading, error, empty } = useData(); // Anti-pattern 1 — données statiques importées directement dans le composant — idéalement : fetching depuis une API ou custom hook.
-
-  // Anti-pattern 6 — Logique métier complexe directement dans le composant
 
   const totalParticipatingCountries = data ? data.length : 0;
   const totalGamesEditions = 5;
@@ -53,7 +51,6 @@ const DashboardPage = () => {
           </p>
         </div>
 
-        {/* Anti-pattern 8 — Cartes dupliquées — extraire en composant réutilisable (Indicator.tsx). */}
         <div className="mb-2">
           {DashBoardStats.map((stat, index) => (
             <Indicator

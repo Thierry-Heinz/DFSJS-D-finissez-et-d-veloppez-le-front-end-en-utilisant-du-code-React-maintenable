@@ -6,11 +6,10 @@ interface Participation {
   medalsCount: number;
 }
 
-interface CountryData {
+interface Olympic {
   id: number;
   name: string;
   participations: Participation[];
 }
 
-type Olympic = CountryData[];
-export type { Olympic, CountryData, Participation };
+export type { Olympic, Participation };

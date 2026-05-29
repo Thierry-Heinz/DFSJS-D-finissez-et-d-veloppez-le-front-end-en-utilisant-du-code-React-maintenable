@@ -30,19 +30,25 @@
 
 ## Arborescence
 
+```
 src/app/
-├── App.tsx - Fichier de render + gesiton de route
-├── routes.tsx - Gestion de la route
+├── App.tsx - Fichier de render
+├── routes.tsx - gestion des routes
 ├── components/
-│ ├── HeaderComponent.tsx - Entête réutilisable - Dumb
-│ ├── Indicator.tsx - Carte format de nombre - Dumb
-│ ├── CountriesPieChart.tsx - Graphique camembert tous les pays - Dumb
-│ └── CountryLineChart.tsx - Graphique line médaille par pays - Dumb
+│   ├── Indicator/
+│   │   └── Indicator.tsx - Carte format de nombre - Dumb
+│   ├── MedalChart/
+│   │   └── MedalChart.tsx - Graphique camembert tous les pays - Dumb
+│   └── EvolutionChart/
+│       └── EvolutionChart.tsx - Graphique ligne médaille par pays - Dumb
 ├── pages/
-│ ├── DashboardPage.tsx - page d'accueil dashboard - Smart
-│ ├── CountryPage.tsx - page de détail country - Smart
-│ └── NotFound.tsx - page gestion des erreurs - Dumb
+│   ├── DashboardPage/
+│   │   └── DashboardPage.tsx - page d'accueil dashboard - smart
+│   └── CountryPage/
+│       └── CountryPage.tsx - page de détail country - smart
 ├── hooks/
-│ └── useData.ts - datafetching (mockup avec useEffect)
+│   └── useData.ts  - datafetching (mockup avec useEffect)
 └── models/
-└── models.ts - définition des types
+    └── models.ts - définition des types
+
+```
