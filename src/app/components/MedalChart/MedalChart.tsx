@@ -10,8 +10,11 @@ import {
   LineElement,
   PointElement,
   type TooltipModel,
+  type ChartEvent,
+  type ActiveElement,
 } from 'chart.js';
 import type { Olympic, Participation } from '../../models/models';
+import { useNavigate } from 'react-router-dom';
 
 ChartJS.register(
   ArcElement,
@@ -30,6 +33,7 @@ type MedalChartProps = {
 };
 
 const MedalChart = ({ pieData }: MedalChartProps) => {
+  const navigate = useNavigate();
   const calculateTotalMedals = (country: Olympic) => {
     return country.participations.reduce(
       (sum: number, p: Participation) => sum + p.medalsCount,
@@ -66,6 +70,17 @@ const MedalChart = ({ pieData }: MedalChartProps) => {
     responsive: true,
     maintainAspectRatio: false,
     radius: '75%',
+    onClick: (_event: ChartEvent, elements: ActiveElement[]) => {
+      console.log('Clicked elements:', elements);
+      if (elements.length > 0) {
+        const index = elements[0].index;
+        console.log('Clicked index:', index);
+        const countryId = pieData[index].id;
+        navigate(`/countries/${countryId}`);
+      }
+      const tooltipEl = document.getElementById('chartjs-tooltip');
+      if (tooltipEl) tooltipEl.style.opacity = '0';
+    },
     plugins: {
       legend: {
         position: 'bottom' as const,
@@ -79,14 +94,10 @@ const MedalChart = ({ pieData }: MedalChartProps) => {
           chart: ChartJS;
           tooltip: TooltipModel<'pie'>;
         }) => {
-          // context.tooltip contient toutes les infos
-          // context.chart contient le chart
-          console.log('Tooltip data:', context.tooltip);
           let tooltipEl = document.getElementById('chartjs-tooltip');
           if (!tooltipEl) {
             tooltipEl = document.createElement('div');
             tooltipEl.id = 'chartjs-tooltip';
-
             document.body.appendChild(tooltipEl);
           }
 
@@ -110,9 +121,10 @@ const MedalChart = ({ pieData }: MedalChartProps) => {
           tooltipEl.style.position = 'absolute';
 
           const position = context.chart.canvas.getBoundingClientRect();
-          console.log('Chart position:', position);
           tooltipEl.style.top = `${position.top + window.scrollY + context.tooltip.caretY - tooltipEl.offsetHeight - 10}px`;
           tooltipEl.style.left = `${position.left + window.scrollX + context.tooltip.caretX - tooltipEl.offsetWidth / 2}px`;
+          tooltipEl.style.pointerEvents = 'none';
+          tooltipEl.style.transition = 'all 0.1s ease';
 
           tooltipEl.style.opacity = '1';
         },
