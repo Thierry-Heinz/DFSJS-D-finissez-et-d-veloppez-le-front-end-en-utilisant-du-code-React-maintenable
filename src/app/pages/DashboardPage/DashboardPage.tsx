@@ -1,5 +1,5 @@
-import Indicator from '../../components/Indicator/Indicator';
-import PieMedalChart from '../../components/PieMedalChart/MedalChart';
+import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
+import MedalChart from '../../components/MedalChart/MedalChart';
 import useData from '../../hooks/useData';
 
 const DashboardPage = () => {
@@ -39,32 +39,16 @@ const DashboardPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">
-          Historique des Jeux Olympiques - TéléSport
-        </h1>
+      <div className="max-w-6xl mx-auto flex flex-col items-center">
+        <HeaderComponent
+          title="Tableau de bord des Jeux Olympiques"
+          subtitle="Explorez les performances des pays au fil des années"
+          stats={DashBoardStats}
+        />
 
-        <div className="mb-8">
-          <p className="text-lg">
-            Bienvenue sur la page dédiée à l'historique des Jeux Olympiques.
-            Explorez les performances des pays au fil des années.
-          </p>
-        </div>
-
-        <div className="mb-2">
-          {DashBoardStats.map((stat, index) => (
-            <Indicator
-              key={index}
-              totalParticipatingCountries={stat.value}
-              indicatorTitle={stat.label}
-              baseColor={stat.color}
-            />
-          ))}
-        </div>
-
-        <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
+        <div className="bg-gray-800 p-8 rounded-lg shadow-xl w-full">
           <div style={{ height: '400px' }}>
-            <PieMedalChart pieData={data} />
+            <MedalChart pieData={data} />
           </div>
         </div>
 

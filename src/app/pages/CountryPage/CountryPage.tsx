@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import useData from '../../hooks/useData';
 import LineCountryEvolutionChart from '../../components/EvolutionChart/EvolutionChart';
 import type { Olympic, Participation } from '../../models/models';
-import Indicator from '../../components/Indicator/Indicator';
+import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
 
 const CountryPage = () => {
   const { id } = useParams();
@@ -63,21 +63,10 @@ const CountryPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">{country?.name}</h1>
+      <div className="max-w-6xl mx-auto flex flex-col items-center">
+        <HeaderComponent title={country?.name} stats={CountryStats} />
 
-        <div className="mb-2">
-          {CountryStats.map((stat, index) => (
-            <Indicator
-              key={index}
-              totalParticipatingCountries={stat.value}
-              indicatorTitle={stat.label}
-              baseColor={stat.color}
-            />
-          ))}
-        </div>
-
-        <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
+        <div className="bg-gray-800 p-8 rounded-lg shadow-xl w-full">
           <div style={{ height: '400px' }}>
             <LineCountryEvolutionChart country={country} />
           </div>
