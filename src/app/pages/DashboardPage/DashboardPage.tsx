@@ -3,7 +3,7 @@ import MedalChart from '../../components/MedalChart/MedalChart';
 import useData from '../../hooks/useData';
 
 const DashboardPage = () => {
-  const { data, loading, error, empty } = useData(); // Anti-pattern 1 — données statiques importées directement dans le composant — idéalement : fetching depuis une API ou custom hook.
+  const { data, loading, error, empty } = useData();
 
   const totalParticipatingCountries = data ? data.length : 0;
   const totalGamesEditions = 5;

@@ -48,19 +48,13 @@ const MedalChart = ({ pieData }: MedalChartProps) => {
         label: 'Total des médailles',
         data: pieData.map((d: Olympic) => calculateTotalMedals(d)),
         backgroundColor: [
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
+          '#8B5B6B',
+          '#9B8AAA',
+          '#A8B8C8',
+          '#8090B0',
+          '#A07080',
         ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-        ],
+        borderColor: ['#8B5B6B', '#9B8AAA', '#A8B8C8', '#8090B0', '#A07080'],
         borderWidth: 1,
       },
     ],
@@ -108,13 +102,13 @@ const MedalChart = ({ pieData }: MedalChartProps) => {
 
           tooltipEl.innerHTML = `
           <div id="tooltip-content">
-          <div class="w-full py-1 px-4 text-center flex flex-col items-center gap-1 rounded-lg bg-teal-200">
+          <div class="w-full py-1 px-4 text-center flex flex-col items-center gap-1 rounded-lg bg-teal-700 text-white">
             <h3 class="font-bold text-md">${context.tooltip.dataPoints[0].label}</h3>  
             <span class="font-bold text-sm">🎖️ ${context.tooltip.dataPoints[0].formattedValue}</span>
             </div>
           </div>
             <div class="w-full relative">
-            <div class="tooltip-arrow" style="left: 50%; transform: translateX(-50%); bottom: -5px; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid oklch(91% 0.096 180.426); position: absolute;"></div>
+            <div class="tooltip-arrow" style="left: 50%; transform: translateX(-50%); bottom: -5px; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 5px solid oklch(51.1% 0.096 186.391); position: absolute;"></div>
             </div>`;
 
           tooltipEl.style.opacity = '1';

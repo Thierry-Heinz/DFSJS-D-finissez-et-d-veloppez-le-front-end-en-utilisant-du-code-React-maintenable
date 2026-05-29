@@ -1,3 +1,4 @@
+import { Link, useLocation } from 'react-router-dom';
 import Indicator from '../Indicator/Indicator';
 
 type HeaderComponentProps = {
@@ -11,9 +12,20 @@ type HeaderComponentProps = {
 };
 
 const HeaderComponent = ({ title, subtitle, stats }: HeaderComponentProps) => {
+  const location = useLocation();
+
+  console.log(location);
+
   return (
     <div className="w-full">
-      <div className="rounded-lg shadow-xl bg-gray-800 mb-4 p-8">
+      <div className="rounded-lg shadow-xl bg-gray-800 mb-4 p-8 relative">
+        {location.pathname.includes('/countries') && (
+          <Link to="/">
+            <div className="p-2 rounded-lg shadow-xl absolute mt-2 border-gray-300 bg-gray-700  hover:cursor-pointer hover:bg-gray-600 hover:border-gray-200 transition duration-150">
+              <span className="text-xl font-bold mr-1">‹</span> Retour
+            </div>
+          </Link>
+        )}
         <h1 className="text-4xl font-bold mb-8 text-center">{title}</h1>
         {subtitle && (
           <div className="mb-8">
