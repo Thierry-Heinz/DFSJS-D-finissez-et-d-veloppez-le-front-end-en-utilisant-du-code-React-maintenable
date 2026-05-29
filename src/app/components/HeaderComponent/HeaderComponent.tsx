@@ -13,15 +13,17 @@ type HeaderComponentProps = {
 const HeaderComponent = ({ title, subtitle, stats }: HeaderComponentProps) => {
   return (
     <div className="w-full">
-      <h1 className="text-4xl font-bold mb-8 text-center">{title}</h1>
-      {subtitle && (
-        <div className="mb-8">
-          <p className="text-lg text-center">
-            Bienvenue sur la page dédiée à l'historique des Jeux Olympiques.
-            Explorez les performances des pays au fil des années.
-          </p>
-        </div>
-      )}
+      <div className="rounded-lg shadow-xl bg-gray-800 mb-4 p-8">
+        <h1 className="text-4xl font-bold mb-8 text-center">{title}</h1>
+        {subtitle && (
+          <div className="mb-8">
+            <p className="text-lg text-center">
+              Bienvenue sur la page dédiée à l'historique des Jeux Olympiques.
+              Explorez les performances des pays au fil des années.
+            </p>
+          </div>
+        )}
+      </div>
 
       <div
         className={`mb-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-${stats.length} gap-4`}
