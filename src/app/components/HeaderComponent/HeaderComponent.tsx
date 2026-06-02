@@ -74,7 +74,7 @@ const HeaderComponent = ({
         {stats.map((stat, index) => (
           <Indicator
             key={index}
-            totalParticipatingCountries={stat.value}
+            stat={stat.value}
             indicatorTitle={stat.label}
             baseColor={stat.color}
           />
