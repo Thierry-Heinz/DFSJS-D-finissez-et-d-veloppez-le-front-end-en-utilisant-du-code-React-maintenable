@@ -5,68 +5,44 @@ import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
 import { Layout } from '../../components/Layout/Layout';
 
 const CountryPage = () => {
-  const { data, loading, error, notFound } = useData();
+  const { data, loading, error, notFound, empty } = useData();
 
-  if (loading) {
-    return <div>Chargement...</div>;
-  }
-
-  if (error) {
-    return <div>Erreur : {error}</div>;
-  }
-
-  if (data === null) {
-    return <div>Pas de données</div>;
-  }
-
-  if (notFound) {
-    return <div>Aucune donnée disponible</div>;
-  }
-
-  console.log('Country data:', data);
-
-  if (data === undefined) {
-    return <div>Pas de données disponible pour ce pays.</div>;
-  }
-
-  const totalMedals = data[0]?.participations.reduce(
-    (sum: number, p: Participation) => sum + p.medalsCount,
-    0
-  );
-
-  const totalAthletes = data[0]?.participations.reduce(
-    (sum: number, p: Participation) => sum + p.athleteCount,
-    0
-  );
-  const totalParticipations = data[0]?.participations.length;
+  const country = data[0]; // On suppose que data contient un seul pays correspondant à l'ID ou au nom
 
   const CountryStats = [
     {
       label: 'Participations',
-      value: totalParticipations,
+      value: country?.participations.length,
       color: 'blue',
     },
     {
       label: 'Total médailles',
-      value: totalMedals,
+      value: country?.participations.reduce(
+        (sum: number, p: Participation) => sum + p.medalsCount,
+        0
+      ),
       color: 'yellow',
     },
     {
       label: 'Total athlètes',
-      value: totalAthletes,
+      value: country?.participations.reduce(
+        (sum: number, p: Participation) => sum + p.athleteCount,
+        0
+      ),
       color: 'green',
     },
   ];
 
   return (
-    <Layout>
+    <Layout error={error} notFound={notFound} empty={empty} isLoading={loading}>
       <HeaderComponent
-        title={data[0]?.name}
+        title={country?.name}
         stats={CountryStats}
         statsCols={3}
+        isLoading={loading}
       />
 
-      <LineCountryEvolutionChart country={data[0]} />
+      <LineCountryEvolutionChart country={data} isLoading={loading} />
     </Layout>
   );
 };

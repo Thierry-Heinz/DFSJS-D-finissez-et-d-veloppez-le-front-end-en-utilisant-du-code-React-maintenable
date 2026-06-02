@@ -4,7 +4,7 @@ import MedalChart from '../../components/MedalChart/MedalChart';
 import useData from '../../hooks/useData';
 
 const DashboardPage = () => {
-  const { data, loading, error, notFound } = useData();
+  const { data, loading, error, notFound, empty } = useData();
 
   const totalParticipatingCountries = data ? data.length : 0;
   const totalGamesEditions = 5;
@@ -22,32 +22,17 @@ const DashboardPage = () => {
     },
   ];
 
-  if (loading) {
-    return <div>Chargement...</div>;
-  }
-
-  if (error) {
-    return <div>Erreur : {error}</div>;
-  }
-
-  if (data === null) {
-    return <div>Pas de données</div>;
-  }
-
-  if (notFound) {
-    return <div>Aucune donnée disponible</div>;
-  }
-
   return (
-    <Layout>
+    <Layout error={error} notFound={notFound} empty={empty} isLoading={loading}>
       <HeaderComponent
         title="Tableau de bord des Jeux Olympiques"
         subtitle="Explorez les performances des pays au fil des années"
         stats={DashBoardStats}
         statsCols={2}
+        isLoading={loading}
       />
 
-      <MedalChart pieData={data} />
+      <MedalChart pieData={data} isLoading={loading} />
     </Layout>
   );
 };

@@ -15,6 +15,7 @@ import {
 } from 'chart.js';
 import type { Olympic, Participation } from '../../models/models';
 import { useNavigate } from 'react-router-dom';
+import { SkeletonBlock } from '../SkeletonBlock/SkeletonBlock';
 
 ChartJS.register(
   ArcElement,
@@ -30,9 +31,10 @@ ChartJS.register(
 
 type MedalChartProps = {
   pieData: Olympic[];
+  isLoading: boolean;
 };
 
-const MedalChart = ({ pieData }: MedalChartProps) => {
+const MedalChart = ({ pieData, isLoading }: MedalChartProps) => {
   const navigate = useNavigate();
   const calculateTotalMedals = (country: Olympic) => {
     return country.participations.reduce(
@@ -161,9 +163,15 @@ const MedalChart = ({ pieData }: MedalChartProps) => {
     },
   };
 
+  if (isLoading) {
+    return (
+      <SkeletonBlock className="col-span-12 bg-gray-800 p-8 rounded-lg shadow-xl w-full animate-pulse border-1 border-gray-500 h-85" />
+    );
+  }
+
   return (
     <div
-      className="bg-gray-800 p-8 rounded-lg shadow-xl col-span-12 xl:h-[50vh]"
+      className="bg-gray-800 p-8 rounded-lg shadow-xl col-span-12 "
       role="region"
       aria-label="Graphique des médailles"
     >

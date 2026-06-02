@@ -45,14 +45,15 @@ const useData = () => {
         setError(`Error loading data, ${err}`);
         setIsLoading(false);
       }
-    }, 500);
+    }, 1500);
   }, [id]);
 
   return {
     data,
     loading,
     error,
-    notFound,
+    notFound, // Si data est vide, on considère que ce n'est pas une erreur de "not found"
+    empty: !loading && !notFound && data.length === 0,
   };
 };
 

@@ -11,6 +11,7 @@ import {
   PointElement,
 } from 'chart.js';
 import type { Olympic, Participation } from '../../models/models';
+import { SkeletonBlock } from '../SkeletonBlock/SkeletonBlock';
 
 ChartJS.register(
   ArcElement,
@@ -23,19 +24,21 @@ ChartJS.register(
   PointElement
 );
 
-type EvolutionChartProps = { country: Olympic };
+type EvolutionChartProps = { country: Olympic[]; isLoading: boolean };
 
-const EvolutionChart = ({ country }: EvolutionChartProps) => {
-  const sortedParticipations = country.participations.sort(
+const EvolutionChart = ({ country, isLoading }: EvolutionChartProps) => {
+  const sortedParticipations = country[0]?.participations.sort(
     (a, b) => a.year - b.year
   ); // décroissant
   const evolutionData = {
-    labels: sortedParticipations.map((p: Participation) => p.year.toString()),
+    labels:
+      sortedParticipations?.map((p: Participation) => p.year.toString()) || [],
 
     datasets: [
       {
         label: 'Nombre de médailles',
-        data: sortedParticipations.map((p: Participation) => p.medalsCount),
+        data:
+          sortedParticipations?.map((p: Participation) => p.medalsCount) || [],
         borderColor: 'rgb(75, 192, 192)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
         tension: 0.3,
@@ -73,6 +76,12 @@ const EvolutionChart = ({ country }: EvolutionChartProps) => {
       },
     },
   };
+
+  if (isLoading) {
+    return (
+      <SkeletonBlock className="col-span-12 bg-gray-800 p-8 rounded-lg shadow-xl w-full animate-pulse border-1 border-gray-500 h-85" />
+    );
+  }
 
   return (
     <div
