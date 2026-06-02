@@ -5,13 +5,7 @@ type LayoutProps = {
   empty?: boolean;
   isLoading?: boolean;
 };
-export const Layout = ({
-  children,
-  error,
-  notFound,
-  empty,
-  isLoading,
-}: LayoutProps) => {
+export const Layout = ({ children, error, empty, isLoading }: LayoutProps) => {
   return (
     <div className="min-h-screen bg-gray-900 text-white p-8" role="main">
       <div className="max-w-6xl mx-auto grid grid-cols-4 lg:grid-cols-8 xl:grid-cols-12">
@@ -27,12 +21,7 @@ export const Layout = ({
           </div>
         )}
 
-        {!isLoading && notFound && (
-          <div className="text-center bg-yellow-500 text-white p-4 col-span-12">
-            Aucune donnée disponible
-          </div>
-        )}
-        {notFound || error || empty ? null : children}
+        {error || empty ? null : children}
       </div>
     </div>
   );

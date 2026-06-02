@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import olympicsData from '../../olympicsData.json';
 import type { Olympic } from '../models/models';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const useData = () => {
   const { id } = useParams();
   const [data, setData] = useState<Olympic[]>([]);
   const [loading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [notFound, setNotFound] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
@@ -37,7 +38,7 @@ const useData = () => {
         }
 
         if (tempData && tempData.length === 0) {
-          setNotFound(true);
+          navigate('/not-found');
         }
 
         setIsLoading(false);
@@ -45,15 +46,14 @@ const useData = () => {
         setError(`Error loading data, ${err}`);
         setIsLoading(false);
       }
-    }, 1500);
-  }, [id]);
+    }, 500);
+  }, [id, navigate]);
 
   return {
     data,
     loading,
     error,
-    notFound, // Si data est vide, on considère que ce n'est pas une erreur de "not found"
-    empty: !loading && !notFound && data.length === 0,
+    empty: !loading && data.length === 0,
   };
 };
 

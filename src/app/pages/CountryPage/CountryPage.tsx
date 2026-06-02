@@ -3,38 +3,41 @@ import LineCountryEvolutionChart from '../../components/EvolutionChart/Evolution
 import type { Participation } from '../../models/models';
 import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
 import { Layout } from '../../components/Layout/Layout';
+import { useMemo } from 'react';
 
 const CountryPage = () => {
-  const { data, loading, error, notFound, empty } = useData();
+  const { data, loading, error, empty } = useData();
 
   const country = data[0]; // On suppose que data contient un seul pays correspondant à l'ID ou au nom
 
-  const CountryStats = [
-    {
-      label: 'Participations',
-      value: country?.participations.length,
-      color: 'blue',
-    },
-    {
-      label: 'Total médailles',
-      value: country?.participations.reduce(
-        (sum: number, p: Participation) => sum + p.medalsCount,
-        0
-      ),
-      color: 'yellow',
-    },
-    {
-      label: 'Total athlètes',
-      value: country?.participations.reduce(
-        (sum: number, p: Participation) => sum + p.athleteCount,
-        0
-      ),
-      color: 'green',
-    },
-  ];
+  const CountryStats = useMemo(() => {
+    return [
+      {
+        label: 'Participations',
+        value: country?.participations.length,
+        color: 'blue',
+      },
+      {
+        label: 'Total médailles',
+        value: country?.participations.reduce(
+          (sum: number, p: Participation) => sum + p.medalsCount,
+          0
+        ),
+        color: 'yellow',
+      },
+      {
+        label: 'Total athlètes',
+        value: country?.participations.reduce(
+          (sum: number, p: Participation) => sum + p.athleteCount,
+          0
+        ),
+        color: 'green',
+      },
+    ];
+  }, [country]);
 
   return (
-    <Layout error={error} notFound={notFound} empty={empty} isLoading={loading}>
+    <Layout error={error} empty={empty} isLoading={loading}>
       <HeaderComponent
         title={country?.name}
         stats={CountryStats}
