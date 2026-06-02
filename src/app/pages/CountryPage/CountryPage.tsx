@@ -1,13 +1,11 @@
-import { useParams } from 'react-router-dom';
 import useData from '../../hooks/useData';
 import LineCountryEvolutionChart from '../../components/EvolutionChart/EvolutionChart';
-import type { Olympic, Participation } from '../../models/models';
+import type { Participation } from '../../models/models';
 import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
 import { Layout } from '../../components/Layout/Layout';
 
 const CountryPage = () => {
-  const { id } = useParams();
-  const { data, loading, error, empty } = useData();
+  const { data, loading, error, notFound } = useData();
 
   if (loading) {
     return <div>Chargement...</div>;
@@ -21,28 +19,26 @@ const CountryPage = () => {
     return <div>Pas de données</div>;
   }
 
-  if (empty) {
+  if (notFound) {
     return <div>Aucune donnée disponible</div>;
   }
 
-  const country: Olympic | undefined = data.find(
-    (c: Olympic) => c.id === Number(id)
-  );
+  console.log('Country data:', data);
 
-  if (country === undefined) {
+  if (data === undefined) {
     return <div>Pas de données disponible pour ce pays.</div>;
   }
 
-  const totalMedals = country?.participations.reduce(
+  const totalMedals = data[0]?.participations.reduce(
     (sum: number, p: Participation) => sum + p.medalsCount,
     0
   );
 
-  const totalAthletes = country?.participations.reduce(
+  const totalAthletes = data[0]?.participations.reduce(
     (sum: number, p: Participation) => sum + p.athleteCount,
     0
   );
-  const totalParticipations = country?.participations.length;
+  const totalParticipations = data[0]?.participations.length;
 
   const CountryStats = [
     {
@@ -65,12 +61,12 @@ const CountryPage = () => {
   return (
     <Layout>
       <HeaderComponent
-        title={country?.name}
+        title={data[0]?.name}
         stats={CountryStats}
         statsCols={3}
       />
 
-      <LineCountryEvolutionChart country={country} />
+      <LineCountryEvolutionChart country={data[0]} />
     </Layout>
   );
 };

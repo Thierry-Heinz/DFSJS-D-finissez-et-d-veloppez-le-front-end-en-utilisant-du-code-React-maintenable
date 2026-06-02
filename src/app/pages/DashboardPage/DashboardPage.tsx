@@ -4,7 +4,7 @@ import MedalChart from '../../components/MedalChart/MedalChart';
 import useData from '../../hooks/useData';
 
 const DashboardPage = () => {
-  const { data, loading, error, empty } = useData();
+  const { data, loading, error, notFound } = useData();
 
   const totalParticipatingCountries = data ? data.length : 0;
   const totalGamesEditions = 5;
@@ -34,7 +34,7 @@ const DashboardPage = () => {
     return <div>Pas de données</div>;
   }
 
-  if (empty) {
+  if (notFound) {
     return <div>Aucune donnée disponible</div>;
   }
 
