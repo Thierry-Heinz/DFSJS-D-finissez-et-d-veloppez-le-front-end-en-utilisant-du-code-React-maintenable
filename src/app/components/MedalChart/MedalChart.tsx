@@ -41,20 +41,16 @@ const MedalChart = ({ pieData }: MedalChartProps) => {
     );
   };
 
+  const colors = ['#8B5B6B', '#9B8AAA', '#A8B8C8', '#8090B0', '#A07080'];
+
   const chartData = {
     labels: pieData.map((d: Olympic) => d.name),
     datasets: [
       {
         label: 'Total des médailles',
         data: pieData.map((d: Olympic) => calculateTotalMedals(d)),
-        backgroundColor: [
-          '#8B5B6B',
-          '#9B8AAA',
-          '#A8B8C8',
-          '#8090B0',
-          '#A07080',
-        ],
-        borderColor: ['#8B5B6B', '#9B8AAA', '#A8B8C8', '#8090B0', '#A07080'],
+        backgroundColor: colors,
+        borderColor: colors,
         borderWidth: 1,
       },
     ],
@@ -65,7 +61,6 @@ const MedalChart = ({ pieData }: MedalChartProps) => {
     maintainAspectRatio: false,
     radius: '75%',
     onClick: (_event: ChartEvent, elements: ActiveElement[]) => {
-      console.log('Clicked elements:', elements);
       if (elements.length > 0) {
         const index = elements[0].index;
         console.log('Clicked index:', index);
@@ -88,6 +83,7 @@ const MedalChart = ({ pieData }: MedalChartProps) => {
           chart: ChartJS;
           tooltip: TooltipModel<'pie'>;
         }) => {
+          if (context.chart.width < 768) return;
           let tooltipEl = document.getElementById('chartjs-tooltip');
           if (!tooltipEl) {
             tooltipEl = document.createElement('div');
@@ -129,6 +125,7 @@ const MedalChart = ({ pieData }: MedalChartProps) => {
   const outLabelsPlugin = {
     id: 'outLabels',
     afterDraw(chart: ChartJS) {
+      if (chart.width < 768) return;
       chart.getDatasetMeta(0).data.forEach((arc, index: number) => {
         const element = arc as unknown as ArcElement;
         const midAngle = (element.startAngle + element.endAngle) / 2;
@@ -165,7 +162,22 @@ const MedalChart = ({ pieData }: MedalChartProps) => {
   };
 
   return (
-    <Pie data={chartData} options={chartOptions} plugins={[outLabelsPlugin]} />
+    <div
+      className="bg-gray-800 p-8 rounded-lg shadow-xl col-span-12 xl:h-[50vh]"
+      role="region"
+      aria-label="Graphique des médailles"
+    >
+      <div style={{ height: '400px' }}>
+        <Pie
+          data={chartData}
+          options={chartOptions}
+          plugins={[outLabelsPlugin]}
+        />
+        <div className="text-sm text-gray-400">
+          <p>Cliquez sur un pays pour voir ses détails</p>
+        </div>
+      </div>
+    </div>
   );
 };
 

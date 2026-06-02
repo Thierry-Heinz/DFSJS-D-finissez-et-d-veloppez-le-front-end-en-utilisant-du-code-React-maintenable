@@ -3,6 +3,7 @@ import useData from '../../hooks/useData';
 import LineCountryEvolutionChart from '../../components/EvolutionChart/EvolutionChart';
 import type { Olympic, Participation } from '../../models/models';
 import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
+import { Layout } from '../../components/Layout/Layout';
 
 const CountryPage = () => {
   const { id } = useParams();
@@ -62,25 +63,15 @@ const CountryPage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8">
-      <div className="max-w-6xl mx-auto flex flex-col items-center">
-        <HeaderComponent
-          title={country?.name}
-          stats={CountryStats}
-          statsCols={3}
-        />
+    <Layout>
+      <HeaderComponent
+        title={country?.name}
+        stats={CountryStats}
+        statsCols={3}
+      />
 
-        <div className="bg-gray-800 p-8 rounded-lg shadow-xl w-full">
-          <div style={{ height: '400px' }}>
-            <LineCountryEvolutionChart country={country} />
-          </div>
-        </div>
-
-        <div className="text-sm text-gray-400">
-          <p>Données des 5 dernières éditions des Jeux Olympiques</p>
-        </div>
-      </div>
-    </div>
+      <LineCountryEvolutionChart country={country} />
+    </Layout>
   );
 };
 

@@ -74,7 +74,20 @@ const EvolutionChart = ({ country }: EvolutionChartProps) => {
     },
   };
 
-  return <Line data={evolutionData} options={evolutionOptions} />;
+  return (
+    <div
+      className="col-span-12 bg-gray-800 p-8 rounded-lg shadow-xl w-full"
+      role="region"
+      aria-label="Graphique de l'évolution des médailles par pays"
+    >
+      <div style={{ height: '400px' }}>
+        <Line data={evolutionData} options={evolutionOptions} />
+        <div className="text-sm text-gray-400">
+          <p>Données des 5 dernières éditions des Jeux Olympiques</p>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default EvolutionChart;
