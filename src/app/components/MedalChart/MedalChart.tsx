@@ -67,7 +67,7 @@ const MedalChart = ({ pieData, isLoading }: MedalChartProps) => {
         const index = elements[0].index;
         console.log('Clicked index:', index);
         const countryId = pieData[index].id;
-        navigate(`/countries/${countryId}`);
+        navigate(`/country/${countryId}`);
       }
       const tooltipEl = document.getElementById('chartjs-tooltip');
       if (tooltipEl) tooltipEl.style.opacity = '0';
