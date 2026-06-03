@@ -3,9 +3,12 @@ import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
 import { Layout } from '../../components/Layout/Layout';
 import MedalChart from '../../components/MedalChart/MedalChart';
 import useData from '../../hooks/useData';
+import { useNavigate } from 'react-router-dom';
 
 const DashboardPage = () => {
-  const { data, loading, error, empty } = useData();
+  const { data, loading } = useData({});
+
+  const navigate = useNavigate();
 
   const DashBoardStats = useMemo(() => {
     return [
@@ -23,7 +26,7 @@ const DashboardPage = () => {
   }, [data]);
 
   return (
-    <Layout error={error} empty={empty} isLoading={loading}>
+    <Layout>
       <HeaderComponent
         title="Tableau de bord des Jeux Olympiques"
         subtitle="Explorez les performances des pays au fil des années"

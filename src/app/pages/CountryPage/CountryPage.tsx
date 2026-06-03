@@ -4,9 +4,11 @@ import type { Participation } from '../../models/models';
 import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
 import { Layout } from '../../components/Layout/Layout';
 import { useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 
 const CountryPage = () => {
-  const { data, loading, error, empty } = useData();
+  const { id } = useParams();
+  const { data, loading, error, empty } = useData(id);
 
   const country = data[0]; // On suppose que data contient un seul pays correspondant à l'ID ou au nom
 
