@@ -5,16 +5,12 @@ import NotFound from './components/NotFound/NotFound';
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <DashboardPage />,
-  },
-  {
-    path: '/countries/:id',
-    element: <CountryPage />,
-  },
-  {
-    path: '*',
-    element: <NotFound />,
+    errorElement: <NotFound />, // capture toutes les erreurs enfants
+    children: [
+      { path: '/', element: <DashboardPage /> },
+      { path: '/country/:id', element: <CountryPage /> },
+      { path: '*', element: <NotFound /> },
+    ],
   },
 ]);
 

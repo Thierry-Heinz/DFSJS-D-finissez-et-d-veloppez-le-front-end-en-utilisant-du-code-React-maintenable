@@ -1,32 +1,44 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useRouteError } from 'react-router-dom';
 import { Layout } from '../Layout/Layout';
 
-type notFoundProps = {
-  error?: string | null;
-  isLoading?: boolean;
-  empty?: boolean;
-};
+const NotFound = () => {
+  const errorRouter: unknown = useRouteError();
+  const location = useLocation();
 
-const NotFound = ({ error, isLoading, empty }: notFoundProps) => {
   return (
     <Layout>
-      <div className="text-center bg-yellow-500 text-white p-4 col-span-12 py-12 rounded-lg shadow-xl">
+      <div className="not-found text-center bg-yellow-500 text-white p-4 col-span-12 py-12 rounded-lg shadow-xl">
         <h1 className="text-2xl font-bold">404 - Page non trouvée</h1>
 
-        {error && (
-          <div className="text-center bg-red-500 text-white p-4 col-span-12">
-            Erreur : {error}
-          </div>
+        {errorRouter && (
+          <p className="text-lg mt-2">Une erreur inattendue s'est produite</p>
         )}
 
-        {!isLoading && empty && (
+        {errorRouter === null &&
+          !location?.state?.noDataFound &&
+          !location?.state?.noData &&
+          !location?.state?.error && (
+            <p className="text-lg mt-2">Cette page n'existe pas.</p>
+          )}
+
+        {location?.state?.noDataFound && (
+          <p className="text-lg mt-2">
+            Aucune donnée trouvée pour cette ressource. Veuillez vérifier l'URL
+            ou réessayer plus tard.
+          </p>
+        )}
+
+        {location?.state?.noData && !location?.state?.error && (
           <div className="text-center bg-gray-500 text-white p-4 col-span-12">
-            Pas de données
+            Pas de données récupérées du serveur. Veuillez réessayer plus tard.
           </div>
         )}
 
-        {!error && !empty && (
-          <p className="text-lg">Aucune donnée disponible</p>
+        {location?.state?.error && (
+          <div className="text-center bg-gray-500 text-white p-4 col-span-12">
+            Une erreur s'est produite lors de la récupération des données:{' '}
+            {location.state.error}
+          </div>
         )}
 
         <Link to="/" role="button" aria-label="Retour à l'accueil">

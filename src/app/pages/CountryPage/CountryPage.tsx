@@ -3,14 +3,22 @@ import LineCountryEvolutionChart from '../../components/EvolutionChart/Evolution
 import type { Participation } from '../../models/models';
 import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
 import { Layout } from '../../components/Layout/Layout';
-import { useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useEffect, useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const CountryPage = () => {
   const { id } = useParams();
-  const { data, loading, error, empty } = useData(id);
+  const { data, loading, error, noData, noDataFound } = useData({ id });
+
+  const navigate = useNavigate();
 
   const country = data[0]; // On suppose que data contient un seul pays correspondant à l'ID ou au nom
+
+  useEffect(() => {
+    if (noDataFound || noData || error) {
+      navigate('/not-found', { state: { noDataFound, noData, error } });
+    }
+  }, [noDataFound, noData, error, navigate]);
 
   const CountryStats = useMemo(() => {
     return [
@@ -39,7 +47,7 @@ const CountryPage = () => {
   }, [country]);
 
   return (
-    <Layout error={error} empty={empty} isLoading={loading}>
+    <Layout>
       <HeaderComponent
         title={country?.name}
         stats={CountryStats}

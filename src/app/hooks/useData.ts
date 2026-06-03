@@ -10,11 +10,13 @@ const useData = ({ id }: useDataProps) => {
   const [data, setData] = useState<Olympic[]>([]);
   const [loading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [notFound, setNotFound] = useState(false);
+  const [noDataFound, setNoDataFound] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
       try {
+        // throw new Error('Simulation: échec du fetch');
+
         let tempData: Olympic[] = [];
         if (typeof id === 'undefined') {
           // No filtering, return all data
@@ -39,7 +41,7 @@ const useData = ({ id }: useDataProps) => {
         }
 
         if (tempData && tempData.length === 0) {
-          setNotFound(true);
+          setNoDataFound(true);
         }
 
         setIsLoading(false);
@@ -54,8 +56,8 @@ const useData = ({ id }: useDataProps) => {
     data,
     loading,
     error,
-    notFound,
-    empty: !loading && data.length === 0,
+    noDataFound,
+    noData: !loading && !noDataFound && data.length === 0,
   };
 };
 

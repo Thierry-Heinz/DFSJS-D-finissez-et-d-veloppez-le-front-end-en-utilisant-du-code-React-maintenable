@@ -1,14 +1,20 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import HeaderComponent from '../../components/HeaderComponent/HeaderComponent';
 import { Layout } from '../../components/Layout/Layout';
 import MedalChart from '../../components/MedalChart/MedalChart';
 import useData from '../../hooks/useData';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 const DashboardPage = () => {
-  const { data, loading } = useData({});
+  const { data, loading, error, noData, noDataFound } = useData({});
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (noDataFound || noData || error) {
+      navigate('/not-found', { state: { noDataFound, noData, error } });
+    }
+  }, [noDataFound, noData, error, navigate]);
 
   const DashBoardStats = useMemo(() => {
     return [
