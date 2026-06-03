@@ -18,19 +18,20 @@ const NotFound = () => {
           !location?.state?.noDataFound &&
           !location?.state?.noData &&
           !location?.state?.error && (
-            <p className="text-lg mt-2">Cette page n'existe pas.</p>
+            <p className="text-lg mt-2">
+              Cette page n'existe pas. Mauvaise URL
+            </p>
           )}
 
         {location?.state?.noDataFound && (
           <p className="text-lg mt-2">
-            Aucune donnée trouvée pour cette ressource. Veuillez vérifier l'URL
-            ou réessayer plus tard.
+            Aucune donnée trouvée pour cette ressource. ID invalide.
           </p>
         )}
 
         {location?.state?.noData && !location?.state?.error && (
           <div className="text-center bg-gray-500 text-white p-4 col-span-12">
-            Pas de données récupérées du serveur. Veuillez réessayer plus tard.
+            Données manquantes. Veuillez réessayer plus tard.
           </div>
         )}
 

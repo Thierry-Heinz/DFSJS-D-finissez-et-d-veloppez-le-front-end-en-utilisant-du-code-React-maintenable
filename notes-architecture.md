@@ -2,14 +2,25 @@
 
 ## Constatations
 
+### Structure
+
 - Tout le code est dans le fichier App.tsx
-- Il n'y a aucun typage strict (any)
-- Il y a plusieurs composants dans le même fichier
-- Les données mockup sont chargés directement dans le fichier
-- L'UI et la logique fonctionelle sont mélangés
-- Il y a des composants non utilisés dans le fichier (Détail: Country)
 - Le fichier n'a pas été nettoyé, présence de console.log()
 - React-router-dom est installé mais il n'y pas de gestion des routes
+
+### Typage
+
+- Il n'y a aucun typage strict (any)
+
+### Duplication
+
+- Les données mockup sont chargés directement dans le fichier
+
+### Placement
+
+- Il y a plusieurs composants dans le même fichier
+- L'UI et la logique fonctionelle sont mélangés
+- Il y a des composants non utilisés dans le fichier (Détail: Country)
 
 ## Recommandations
 
@@ -52,3 +63,5 @@ src/app/
     └── models.ts - définition des types
 
 ```
+
+![Architecture de l'application](./architecture.png)

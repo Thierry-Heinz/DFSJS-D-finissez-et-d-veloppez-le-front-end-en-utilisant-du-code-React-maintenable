@@ -62,32 +62,68 @@ npm run lint
 
 ```
 p2-dfsjs/
-├── public/              # Static public assets
 ├── src/
-│   ├── App.tsx         # Main application component
-│   ├── main.tsx        # React entry point
-│   └── index.css       # Global styles
-├── index.html          # Main HTML page
-├── package.json        # Project dependencies
-├── tsconfig.json       # TypeScript configuration
-├── vite.config.ts      # Vite configuration
-├── tailwind.config.js  # Tailwind CSS configuration
-└── .eslintrc.cjs       # ESLint configuration
+│   └── app/
+│       ├── components/
+│       │   ├── EvolutionChart/
+│       │   │   └── EvolutionChart.tsx // line Chart for Country / year / medals
+│       │   ├── HeaderComponent/
+│       │   │   └── HeaderComponent.tsx // Header + Navigation
+│       │   ├── Indicator/
+│       │   │   └── Indicator.tsx // Card format number display
+│       │   ├── Layout/
+│       │   │   └── Layout.tsx // reuseable page design
+│       │   ├── MedalChart/
+│       │   │   └── MedalChart.tsx // Pie chart for all countries/medals
+│       │   ├── NotFound/
+│       │   │   └── NotFound.tsx // Error Handling
+│       │   └── SkeletonBlock/
+│       │       └── SkeletonBlock.tsx // Loading animation
+│       ├── hooks/
+│       │   └── useData.ts // Data fetching and logic
+│       ├── models/
+│       │   └── models.ts // type definition
+│       ├── pages/
+│       │   ├── CountryPage/
+│       │   │   └── CountryPage.tsx // detail page
+│       │   └── DashboardPage/
+│       │       └── DashboardPage.tsx // home page
+│       ├── App.tsx // entry point
+│       ├── routes.tsx // routing
+│       ├── index.css // global styling
+│       └── main.tsx // Root
+├── eslint.config.js
+├── index.html
+├── olympicsData.json
+├── package.json
+├── tsconfig.app.json
+├── tsconfig.json
+└── .gitignore
 ```
 
 ## 🔧 Tech Stack
 
 - **React 19** - UI library with latest features
 - **TypeScript** - Static type checking
-- **Vite 5** - Fast build tool and dev server
+- **Vite 7** - Fast build tool and dev server
 - **Tailwind CSS 4** - Utility-first CSS framework
 - **React Router 6** - Client-side routing
-- **Chart.js** - Interactive data visualization
+- **Chart.js 4** - Interactive data visualization
 - **ESLint** - Code quality and consistency
 
 ## 📊 Data
 
 The application currently uses mock data to simulate Olympic Games statistics. This architecture is designed to facilitate future integration with a REST API backend.
+
+The application use the custom hook useData.ts to fetch and filter the data
+
+## 🧭 Routing
+
+The routing of the application is handled by react-router in the route.tsx file
+
+## ❗ Error Handling
+
+The application handle errors with the coordinate use of react-router and the NotFound.tsx component.
 
 ## 🎨 Design
 

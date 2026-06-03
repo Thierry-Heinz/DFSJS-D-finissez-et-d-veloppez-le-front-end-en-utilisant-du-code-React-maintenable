@@ -50,7 +50,7 @@ const HeaderComponent = ({
   return (
     <div className="col-span-12 mb-4" role="navigation" aria-label="Header">
       <div className="rounded-lg shadow-xl bg-gray-800 mb-4 p-6 relative">
-        {location.pathname.includes('/countries') && (
+        {location.pathname.includes('/country') && (
           <Link to="/" role="button" aria-label="Retour à l'accueil">
             <div className="text-sm md:text-lg mb-4 md:mb-0 p-2 rounded-lg shadow-xl inline-block md:absolute  border-gray-300 bg-gray-700 hover:cursor-pointer hover:bg-gray-600 hover:border-gray-200 transition duration-150">
               <span className="  font-bold mr-1">‹</span> Retour
