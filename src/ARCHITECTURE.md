@@ -4,7 +4,11 @@
 
 L'application TéléSport permet la consultation des données historiques des Jeux Olympiques et d'explorer les performances des pays au travers de leurs multiples éditions.
 Construite en TypeScript/React, elle est constituée de deux pages : DashboardPage affichant les statistiques pour l'ensemble des pays, et CountryPage affichant le détail pour un pays donné.
-L'application utilise le custom hook useData pour gérer le chargement des données et les états associés (loading, error, etc.).
+
+- L'application utilise le custom hook useData pour gérer le chargement des données et les états associés (loading, error, etc.).
+- Le composant NotFound.tsx est utilisé pour afficher les différents types d'erreurs.
+- Le typage est défini dans le fichier models.ts
+- Le design est responsive est géré par un Layout réutilisé sur les deux page Dashboard et Country. Les composants dumb s'adapte au besoin du responsive.
 
 ---
 

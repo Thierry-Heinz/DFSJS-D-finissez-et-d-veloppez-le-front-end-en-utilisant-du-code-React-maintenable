@@ -1,6 +1,7 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Indicator from '../Indicator/Indicator';
 import { SkeletonBlock } from '../SkeletonBlock/SkeletonBlock';
+import { BackHomeBtn } from '../BackHomeBtn/BackHomeBtn';
 
 type HeaderComponentProps = {
   title: string;
@@ -51,11 +52,9 @@ const HeaderComponent = ({
     <div className="col-span-12 mb-4" role="navigation" aria-label="Header">
       <div className="rounded-lg shadow-xl bg-gray-800 mb-4 p-6 relative">
         {location.pathname.includes('/country') && (
-          <Link to="/" role="button" aria-label="Retour à l'accueil">
-            <div className="text-sm md:text-lg mb-4 md:mb-0 p-2 rounded-lg shadow-xl inline-block md:absolute  border-gray-300 bg-gray-700 hover:cursor-pointer hover:bg-gray-600 hover:border-gray-200 transition duration-150">
-              <span className="  font-bold mr-1">‹</span> Retour
-            </div>
-          </Link>
+          <div className="md:absolute md:top-4 md:left-4">
+            <BackHomeBtn />
+          </div>
         )}
         <h1 className="text-4xl font-bold text-center">{title}</h1>
         {subtitle && (
